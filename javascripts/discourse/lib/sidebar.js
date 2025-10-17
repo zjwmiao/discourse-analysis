@@ -1,9 +1,9 @@
+import $ from "jquery";
 import { onNodeInserted } from "./utils.js";
 
 export function reportSidebarClick() {
   onNodeInserted("#sidebar-section-content-categories", (node) => {
-    window
-      .$(node)
+    $(node)
       .children()
       .on("click", (ev) => {
         window._oaReport("click", {
@@ -15,8 +15,7 @@ export function reportSidebarClick() {
       });
   });
   onNodeInserted("#sidebar-section-content-tags", (node) => {
-    window
-      .$(node)
+    $(node)
       .children()
       .on("click", (ev) => {
         window._oaReport("click", {

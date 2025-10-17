@@ -1,3 +1,4 @@
+import $ from "jquery";
 import { onNodeInserted } from "./utils.js";
 
 export function reportNavigationClick() {
@@ -5,8 +6,7 @@ export function reportNavigationClick() {
   onNodeInserted(
     ".navigation-container .category-drop.is-expanded .select-kit-collection",
     (node) => {
-      window
-        .$(node)
+      $(node)
         .children()
         .on("click", (ev) =>
           window._oaReport("click", {
@@ -22,8 +22,7 @@ export function reportNavigationClick() {
   onNodeInserted(
     ".navigation-container .tag-drop.is-expanded .select-kit-collection",
     (node) => {
-      window
-        .$(node)
+      $(node)
         .children()
         .on("click", (ev) =>
           window._oaReport("click", {
@@ -39,8 +38,7 @@ export function reportNavigationClick() {
   onNodeInserted(
     ".navigation-container .solved-status-filter.is-expanded .select-kit-collection",
     (node) => {
-      window
-        .$(node)
+      $(node)
         .children()
         .on("click", (ev) =>
           window._oaReport("click", {
@@ -53,19 +51,15 @@ export function reportNavigationClick() {
     }
   );
 
-  onNodeInserted(
-    "#navigation-bar",
-    (node) => {
-      window
-        .$(node)
-        .children()
-        .on("click", (ev) =>
-          window._oaReport("click", {
-            target: ev.currentTarget.textContent.trim(),
-            module: "navigation",
-            $url: location.href,
-          })
-        );
-    }
-  );
+  onNodeInserted("#navigation-bar", (node) => {
+    $(node)
+      .children()
+      .on("click", (ev) =>
+        window._oaReport("click", {
+          target: ev.currentTarget.textContent.trim(),
+          module: "navigation",
+          $url: location.href,
+        })
+      );
+  });
 }

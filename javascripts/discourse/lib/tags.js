@@ -13,7 +13,7 @@ export function reportTagsClick() {
     if (detail.to === "/tags") {
       onNodeInserted(
         ".all-tag-lists .tags-list",
-        node => {
+        (node) => {
           node.querySelectorAll(".tag-box")?.forEach((el) => {
             el.querySelector("a").addEventListener("click", allTagsClick);
           });

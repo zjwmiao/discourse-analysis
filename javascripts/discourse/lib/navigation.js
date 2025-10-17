@@ -1,3 +1,4 @@
+import $ from "jquery";
 import { onNodeInserted } from "./utils.js";
 
 export function reportNavigationClick() {
@@ -5,25 +6,31 @@ export function reportNavigationClick() {
   onNodeInserted(
     ".navigation-container .category-drop.is-expanded .select-kit-collection",
     (node) => {
-      window
-        .$(node)
+      $(node)
         .children()
-        .on("click", (ev) =>
+        .on("click", (ev) => {
+          let textContent = ev.currentTarget.textContent?.trim();
+          if (!textContent) {
+            return;
+          }
+          const sliceIndex = textContent.indexOf("×");
+          if (sliceIndex >= 0) {
+            textContent = textContent.slice(0, sliceIndex);
+          }
           window._oaReport("click", {
-            target: ev.currentTarget.textContent.trim(),
+            target: textContent,
             type: "类别",
             module: "nav-dropdown",
             $url: location.href,
-          })
-        );
+          });
+        });
     }
   );
   // 标签下拉点击
   onNodeInserted(
     ".navigation-container .tag-drop.is-expanded .select-kit-collection",
     (node) => {
-      window
-        .$(node)
+      $(node)
         .children()
         .on("click", (ev) =>
           window._oaReport("click", {
@@ -39,8 +46,7 @@ export function reportNavigationClick() {
   onNodeInserted(
     ".navigation-container .solved-status-filter.is-expanded .select-kit-collection",
     (node) => {
-      window
-        .$(node)
+      $(node)
         .children()
         .on("click", (ev) =>
           window._oaReport("click", {
@@ -53,19 +59,15 @@ export function reportNavigationClick() {
     }
   );
 
-  onNodeInserted(
-    "#navigation-bar",
-    (node) => {
-      window
-        .$(node)
-        .children()
-        .on("click", (ev) =>
-          window._oaReport("click", {
-            target: ev.currentTarget.textContent.trim(),
-            module: "navigation",
-            $url: location.href,
-          })
-        );
-    }
-  );
+  onNodeInserted("#navigation-bar", (node) => {
+    $(node)
+      .children()
+      .on("click", (ev) =>
+        window._oaReport("click", {
+          target: ev.currentTarget.textContent.trim(),
+          module: "navigation",
+          $url: location.href,
+        })
+      );
+  });
 }

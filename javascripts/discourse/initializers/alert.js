@@ -23,7 +23,7 @@ export default {
             disableOA();
             return;
           }
-          fetch("/api-dsapi/query/track/opengauss", {
+          fetch("/api-dsapi-test/query/track/opengauss", {
             body: JSON.stringify(data),
             method: "POST",
             headers: { "Content-Type": "application/json" },

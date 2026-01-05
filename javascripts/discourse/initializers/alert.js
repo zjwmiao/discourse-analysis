@@ -23,7 +23,7 @@ export default {
             disableOA();
             return;
           }
-          fetch("/api-dsapi/query/track/openubmc", {
+          fetch("/api-dsapi-test/query/track/openubmc", {
             body: JSON.stringify(data),
             method: "POST",
             headers: { "Content-Type": "application/json" },
